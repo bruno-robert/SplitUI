@@ -1,0 +1,18 @@
+This is a personal Library I use to create split pane windows in dearpygui.
+It's been tested with dearpygui v0.6.x
+
+It's usage is simple:
+```python
+from SplitUi import SplitUi, Widget
+
+
+class InitialLoader(SplitUi):
+    def __init__(self):
+        super().__init__(panes=2)
+
+il = InitialLoader()
+il.start()
+```
+
+simply create a child class of SplitUI and initialize it with panes = 1, 2 or 3.
+If not panes parameter is passed, it defaults to 3 panes.
