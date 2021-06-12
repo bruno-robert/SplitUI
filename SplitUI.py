@@ -14,6 +14,7 @@ class Panes(Enum):
     left = "Left panel"
     center = "Middle panel"
     right = "Right panel"
+    menu_bar = "Main menu"
 
 
 class SplitUi:
@@ -148,7 +149,7 @@ class SplitUi:
         """
         with window("Main"):
             # Create the menu
-            with menu_bar('Main menu'):
+            with menu_bar(Panes.menu_bar.value):
                 with menu('File'):
                     add_menu_item('Preferences')
                 with menu('Edit'):
