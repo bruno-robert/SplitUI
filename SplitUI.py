@@ -6,7 +6,7 @@ from dearpygui.simple import *
 
 
 @unique
-class Widget(Enum):
+class Panes(Enum):
     """
     This enum stores the names of important widgets such as tabs or reusable windows
     """
@@ -74,7 +74,7 @@ class SplitUi:
         set_item_style_var(f'{name}_container', mvGuiStyleVar_ItemSpacing, [0, y_space])
 
     @staticmethod
-    def _clear_widget(panel: Widget):
+    def _clear_widget(panel: Panes):
         """
         Clears a panel by deleting all it's children.
         :param panel:
@@ -99,21 +99,21 @@ class SplitUi:
         x_pos_left_panel = 0
 
         if self.panes == 1:
-            set_window_pos(Widget.left.value, x=x_pos_left_panel, y=y_pos_panels)
-            set_item_width(Widget.left.value, width=width_main_window)
-            set_item_height(Widget.left.value, height=height_panels)
+            set_window_pos(Panes.left.value, x=x_pos_left_panel, y=y_pos_panels)
+            set_item_width(Panes.left.value, width=width_main_window)
+            set_item_height(Panes.left.value, height=height_panels)
         if self.panes == 2:
             panel_width = int(width_main_window / 2)
             # Left panel
-            set_window_pos(Widget.left.value, x=x_pos_left_panel, y=y_pos_panels)
-            set_item_width(Widget.left.value, width=panel_width)
-            set_item_height(Widget.left.value, height=height_panels)
+            set_window_pos(Panes.left.value, x=x_pos_left_panel, y=y_pos_panels)
+            set_item_width(Panes.left.value, width=panel_width)
+            set_item_height(Panes.left.value, height=height_panels)
 
             x_pos_right_panel = x_pos_left_panel + panel_width
             # Right panel
-            set_window_pos(Widget.right.value, x=x_pos_right_panel, y=y_pos_panels)
-            set_item_width(Widget.right.value, width=panel_width)
-            set_item_height(Widget.right.value, height=height_panels)
+            set_window_pos(Panes.right.value, x=x_pos_right_panel, y=y_pos_panels)
+            set_item_width(Panes.right.value, width=panel_width)
+            set_item_height(Panes.right.value, height=height_panels)
         elif self.panes == 3:
             width_left_panel = 300
             width_middle_panel = int((width_main_window - width_left_panel) / 2)
@@ -122,19 +122,19 @@ class SplitUi:
             x_pos_right_panel = x_pos_middle_panel + width_middle_panel
 
             # Left panel
-            set_window_pos(Widget.left.value, x=x_pos_left_panel, y=y_pos_panels)
-            set_item_width(Widget.left.value, width=width_left_panel)
-            set_item_height(Widget.left.value, height=height_panels)
+            set_window_pos(Panes.left.value, x=x_pos_left_panel, y=y_pos_panels)
+            set_item_width(Panes.left.value, width=width_left_panel)
+            set_item_height(Panes.left.value, height=height_panels)
 
             # Middle panel
-            set_window_pos(Widget.center.value, x=x_pos_middle_panel, y=y_pos_panels)
-            set_item_width(Widget.center.value, width=width_middle_panel)
-            set_item_height(Widget.center.value, height=height_panels)
+            set_window_pos(Panes.center.value, x=x_pos_middle_panel, y=y_pos_panels)
+            set_item_width(Panes.center.value, width=width_middle_panel)
+            set_item_height(Panes.center.value, height=height_panels)
 
             # Right panel
-            set_window_pos(Widget.right.value, x=x_pos_right_panel, y=y_pos_panels)
-            set_item_width(Widget.right.value, width=width_right_panel)
-            set_item_height(Widget.right.value, height=height_panels)
+            set_window_pos(Panes.right.value, x=x_pos_right_panel, y=y_pos_panels)
+            set_item_width(Panes.right.value, width=width_right_panel)
+            set_item_height(Panes.right.value, height=height_panels)
 
     def __init_main_window(self):
         """
@@ -156,7 +156,7 @@ class SplitUi:
                 with menu('Help'):
                     add_menu_item('About')
 
-        with window(Widget.left.value, autosize=False, no_resize=True, no_title_bar=True, no_move=True,
+        with window(Panes.left.value, autosize=False, no_resize=True, no_title_bar=True, no_move=True,
                     no_scrollbar=True,
                     no_collapse=True, horizontal_scrollbar=False, no_focus_on_appearing=True,
                     no_bring_to_front_on_focus=False,
@@ -165,7 +165,7 @@ class SplitUi:
             pass
 
         if self.panes == 3:
-            with window(Widget.center.value, autosize=False, no_resize=True, no_title_bar=True, no_move=True,
+            with window(Panes.center.value, autosize=False, no_resize=True, no_title_bar=True, no_move=True,
                         no_scrollbar=True,
                         no_collapse=True, horizontal_scrollbar=False, no_focus_on_appearing=True,
                         no_bring_to_front_on_focus=False,
@@ -174,7 +174,7 @@ class SplitUi:
                 pass
 
         if self.panes >= 2:
-            with window(Widget.right.value, autosize=False, no_resize=True, no_title_bar=True, no_move=True,
+            with window(Panes.right.value, autosize=False, no_resize=True, no_title_bar=True, no_move=True,
                         no_scrollbar=True,
                         no_collapse=True, horizontal_scrollbar=False, no_focus_on_appearing=True,
                         no_bring_to_front_on_focus=False,
