@@ -1,5 +1,6 @@
 import logging
 from enum import Enum, unique
+from typing import Union
 
 from dearpygui.core import *
 from dearpygui.simple import *
@@ -75,12 +76,15 @@ class SplitUi:
         set_item_style_var(f'{name}_container', mvGuiStyleVar_ItemSpacing, [0, y_space])
 
     @staticmethod
-    def _clear_widget(panel: Panes):
+    def clear_widget(widget_id: Union[Enum, str], children_only=True):
         """
         Clears a panel by deleting all it's children.
-        :param panel:
+        :param widget_id: if of the widget to clear
         """
-        delete_item(panel.value, children_only=True)
+        if issubclass(type(widget_id), Enum):
+            delete_item(widget_id.value, children_only=children_only)
+        else:
+            delete_item(widget_id, children_only=children_only)
 
     def __resize_windows(self, sender, data):
         """
@@ -157,7 +161,6 @@ class SplitUi:
                     no_collapse=True, horizontal_scrollbar=False, no_focus_on_appearing=True,
                     no_bring_to_front_on_focus=False,
                     no_close=True, no_background=False, show=True):
-            add_text('left')
             pass
 
         if self.panes == 3:
@@ -166,7 +169,6 @@ class SplitUi:
                         no_collapse=True, horizontal_scrollbar=False, no_focus_on_appearing=True,
                         no_bring_to_front_on_focus=False,
                         no_close=True, no_background=False, show=True):
-                add_text('center')
                 pass
 
         if self.panes >= 2:
@@ -176,7 +178,6 @@ class SplitUi:
                         no_bring_to_front_on_focus=False,
                         no_close=True, no_background=False,
                         show=True):  # no_background=False --> set to True to remove lines around window
-                add_text('right')
                 pass
         set_start_callback(self.__resize_windows)
         set_resize_callback(self.__resize_windows)
@@ -190,7 +191,7 @@ class SplitUi:
         """
         start_dearpygui(primary_window="Main")
 
-    def _get_uid(self):
+    def get_uid(self):
         """
         Returns a unique ID that can be used to create unique element names. The ID is only unique to the object
         instance and should not be used outside of the instance itself.
@@ -199,4 +200,3 @@ class SplitUi:
         uid = self.current_uid
         self.current_uid += 1
         return uid
-
