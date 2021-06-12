@@ -8,7 +8,7 @@ from SplitUi import SplitUi, Widget
 
 class InitialLoader(SplitUi):
     def __init__(self):
-        super().__init__(panes=2)
+        super().__init__(panes=2)  # panes must be either 1, 2 or 3
 
 il = InitialLoader()
 il.start()
