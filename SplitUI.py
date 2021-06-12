@@ -150,12 +150,7 @@ class SplitUi:
         with window("Main"):
             # Create the menu
             with menu_bar(Panes.menu_bar.value):
-                with menu('File'):
-                    add_menu_item('Preferences')
-                with menu('Edit'):
-                    add_menu_item('Item 1##Edit')
-                with menu('Help'):
-                    add_menu_item('About')
+                pass
 
         with window(Panes.left.value, autosize=False, no_resize=True, no_title_bar=True, no_move=True,
                     no_scrollbar=True,
