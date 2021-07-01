@@ -1,5 +1,5 @@
 This is a personal Library I use to create split pane windows in [dearpygui](https://github.com/hoffstadt/DearPyGui).
-It's been tested with dearpygui v0.6.x
+Now works with dearpygui 0.8.x
 
 It's usage is simple:
 ```python
