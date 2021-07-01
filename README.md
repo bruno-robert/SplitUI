@@ -3,7 +3,7 @@ It's been tested with dearpygui v0.6.x
 
 It's usage is simple:
 ```python
-from SplitUi import SplitUi, Widget
+from SplitUi import SplitUi
 
 
 class InitialLoader(SplitUi):
